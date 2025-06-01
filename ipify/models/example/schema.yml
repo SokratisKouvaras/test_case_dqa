@@ -1,0 +1,33 @@
+
+version: 2
+
+models:
+  - name: orders
+    description: "A test seed file with client orders"
+    columns:
+      - name: order_id
+        description: "The primary key for this table"
+        data_tests:
+          - not_null
+          - unique
+      - name: client_name
+        data_tests:
+          - relationships:
+                to: ref('clients')
+                field: client_name
+      - name: product
+      - name: quantity
+      - name: price
+
+  - name: clients
+    description: "A test seed file with client information"
+    columns:
+      - name: client_name
+        description: "The primary key for this table"
+        data_tests:
+          - unique
+          - not_null
+      - name: street
+      - name: city
+      - name: country
+
