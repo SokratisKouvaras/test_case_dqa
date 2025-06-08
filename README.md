@@ -38,23 +38,28 @@ Produce a small table that answers:
 
 > ⚠️ Note: The source files were not consistently separated using a standard delimiter. This issue was resolved manually by adjusting the files directly, instead of overengineering a solution using Python.
 
+> ⚠️ Note: The source file 'clients' will be converted into a csv since only csv files are supported by dbt.
 ---
 
 ## Repository Structure
 
 ```
 .
-├── dbt_project/            # Main dbt project folder
+├── data/                   # Raw input files
+│   ├── clients.txt
+│   └── orders.csv
+├── ipify/            # Main dbt project folder
 │   ├── models/
 │   ├── seeds/              # Processed input files
 |   ├──   ├── clients.csv
 │   ├──   └── orders.csv
 |   ├── snapshots/
 │   └── dbt_project.yml
-├── Dockerfile
+├── .gitignore
 ├── docker-compose.yml
-├── requirements.txt
-└── README.md
+├── Dockerfile
+├── README.md
+└── requirements.txt
 ```
 
 ---
@@ -88,12 +93,9 @@ This section helps **non-technical users** install Docker and run this dbt proje
 Open your terminal (Command Prompt or Terminal app) and run:
 
 ```bash
-git clone https://github.com/YOUR_USERNAME/YOUR_REPO_NAME.git
-cd YOUR_REPO_NAME
+git clone https://github.com/SokratisKouvaras/test_case_dqa.git
+cd test_case_dqa
 ```
-
-> Replace `YOUR_USERNAME` and `YOUR_REPO_NAME` with the actual repo details.
-
 ---
 
 ### Step 3: Run dbt Using Docker
