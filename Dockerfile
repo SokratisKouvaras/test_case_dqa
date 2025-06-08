@@ -1,4 +1,4 @@
-FROM ghcr.io/dbt-labs/dbt-postgres:1.9.0
+FROM ghcr.io/dbt-labs/dbt-postgres:1.7.13
 
 WORKDIR /usr/src/app
 
@@ -7,4 +7,4 @@ RUN pip install -r requirements.txt
 
 COPY . .
 WORKDIR /usr/src/app/ipify
-CMD [ "run", "--profiles-dir", "profiles", "--fail-fast", "--full-refresh" ]
+CMD [ "build", "--profiles-dir", "profiles", "--fail-fast", "--full-refresh" ]

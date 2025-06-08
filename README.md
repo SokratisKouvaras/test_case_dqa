@@ -106,13 +106,13 @@ docker-compose up --build
 
 This will:
 
-* Build the Postgres database on localhost listing on port 5432.
+* Build the Postgres database on localhost listening on port 5432.
 
 From inside the cloned repo folder, run:
 
 ```bash
-docker build -t dbt .
-docker run --net=host dbt
+docker build -t ipify .
+docker run --net=host ipify
 ```
 
 This will:
