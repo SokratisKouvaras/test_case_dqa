@@ -127,6 +127,27 @@ Once completed, the final table will be available as 'public.solution' inside th
 
 ## Project Logic
 
+### Data Quality Tests Implemented
+
+**For the `orders` model:**
+
+* `order_id` is tested for:
+
+  * Not null (not empty)
+  * Uniqueness (acts as a primary key)
+* `client_name` is tested for:
+
+  * Foreign key relationship to the `clients` table
+
+**For the `clients` model:**
+
+* `client_name` is tested for:
+
+  * Uniqueness
+  * Not null
+
+These tests help ensure data integrity by catching missing or duplicate values and enforcing referential consistency between clients and orders.
+
 The dbt project performs the following:
 
 1. Loads `clients.csv` and `orders.csv` as seed data
