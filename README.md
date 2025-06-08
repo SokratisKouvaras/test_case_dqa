@@ -44,16 +44,16 @@ Produce a small table that answers:
 
 ```
 .
-├── data/                   # Raw input files
-│   ├── clients.txt
-│   └── orders.csv
 ├── dbt_project/            # Main dbt project folder
 │   ├── models/
-│   ├── snapshots/
-│   ├── seeds/
+│   ├── seeds/              # Processed input files
+|   ├──   ├── clients.csv
+│   ├──   └── orders.csv
+|   ├── snapshots/
 │   └── dbt_project.yml
 ├── Dockerfile
 ├── docker-compose.yml
+├── requirements.txt
 └── README.md
 ```
 
@@ -106,10 +106,20 @@ docker-compose up --build
 
 This will:
 
-* Build the Docker image with dbt pre-installed
-* Run the dbt models that transform the raw data
+* Build the Postgres database on localhost listing on port 5432.
 
-Once completed, the final table will be printed to the terminal and stored in the `/target/` folder inside the container.
+From inside the cloned repo folder, run:
+
+```bash
+docker build -t dbt .
+docker run --net=host dbt
+```
+
+This will:
+
+* Run the dbt project and populate the Postgres database with both the initial and transformed data
+
+Once completed, the final table will be available as 'public.solution' inside the Postgres database.
 
 ---
 
@@ -117,7 +127,7 @@ Once completed, the final table will be printed to the terminal and stored in th
 
 The dbt project performs the following:
 
-1. Loads `clients.txt` and `orders.csv` as seed data
+1. Loads `clients.csv` and `orders.csv` as seed data
 2. Joins clients with orders using `client_name`
 3. Groups orders by `Country` and `Product`
 4. Counts number of purchases per product per country
@@ -156,7 +166,7 @@ The dbt project performs the following:
 
 </details>
 
-> You can find the exact output by looking at the final model in `models/final/most_frequent_product_per_country.sql`
+> You can find the exact output by looking at the final model in `models/example/solution.sql`
 
 ---
 
@@ -171,9 +181,3 @@ The dbt project performs the following:
 ## Questions or Issues?
 
 Please feel free to open an issue or contact the repo owner.
-
----
-
-## License
-
-This project is licensed under the MIT License.
